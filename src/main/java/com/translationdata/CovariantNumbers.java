@@ -50,6 +50,7 @@ public class CovariantNumbers {
 		
 		// The code above is equivalent to the code below.
 		List<? extends Number> polymorphicList; 
+		@SuppressWarnings("serial")
 		ArrayList<Number> polymorphicListInit = new ArrayList<Number>() {
 			{
 				add(new Integer(1));
@@ -59,10 +60,6 @@ public class CovariantNumbers {
 		};
 		polymorphicList = polymorphicListInit;
 		
-		
-		polymorphicList.add(new Integer(1));
-
-		List<? extends Number> myNums2;
 		
 		// The adds work because the generic parameter is invariant. The collection datatype must be an exact match 
 		// but the collection can contain a Number or a subtype of a Number.
@@ -76,40 +73,30 @@ public class CovariantNumbers {
 		};
 		
 		// myNums2 has a coviant generic parameter so the assignment works (i.e. Number extends Number).
-		myNums2 = polyList;
 		
-		List<? extends Number> myNums3;
+		List<? extends Number> convariantNums;
+		List<? extends Number> polyNums;
+		polyNums = polyList;
 
-		@SuppressWarnings("serial")
-		List<Integer> intList = new ArrayList<Integer>() {
-			{
-				add(new Integer(1));
-				add(new Integer(2));
-				add(new Integer(3));
-			}
-		};
-		
 		// This looks like it should work but the compiler does not know if the collection is a list of Number, Integer, 
 		// Long, Short, Byte, Double, AtomicInteger, or AtomicLong.
-		myNums2.add(new Integer(4)); // Compiler error
-		
-		// But adding an Integer to intList is okay because intList is invariant!
-		intList.add(new Integer(5));
+		polyNums.add(new Integer(4)); // Compiler error
 		
 		// The following demonstrates why the write to mynum2, a list of Integers, is disallowed. 
 		// You cannot add a Long to a list of Integers.
-		myNums2.add(new Long(5)); // Compiler error
+		polyNums.add(new Long(5)); // Compiler error
 
 		// Try to subvert the type system!
 		List<Number> myNumbers;
 		
 		// Java compiler catches the type mismatch here...
-		myNumbers = myNums3; 		// Compiler error
+		myNumbers = convariantNums; // Compiler error
 		myNumbers.add(new Long(4)); // If this executes (it will NOT execute because of the previous error), 
 									// the Integer list is corrupted by the Long value.
 		
 		
 		List<? extends Number> numberList;
+		@SuppressWarnings("serial")
 		List<Integer> integerList = new ArrayList<Integer>() {
 			{
 				add(new Integer(1));
@@ -140,7 +127,7 @@ public class CovariantNumbers {
 	
 	
 	@Test
-	public void CovariantNumbers() {
+	public void AddToCoviantList() {
 		addToCoviantList();
 	}
 

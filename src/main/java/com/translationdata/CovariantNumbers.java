@@ -7,6 +7,14 @@ import org.junit.Test;
 enum ListType {
 	INT, LONG
 }
+
+/*class Animal {
+	
+}
+class Dog<T> extends Animal {
+	
+}*/
+
 public class CovariantNumbers {
 	List<? extends Number> getList(ListType listType) {
 		List<? extends Number> result = null;
@@ -122,8 +130,16 @@ public class CovariantNumbers {
 		for (Number number : polymorphicList) {
 			System.out.println(number);
 		}
+		
+		// Contravariance
+/*		List<Animal> animals = new ArrayList<>();
+		List<? super Dog> integerSuperList;
+		integerSuperList.add( new Object() );
+		integerSuperList = animals;*/
 	}
+	
 
+	public <T> void f (Dog<T> x) {}
 	
 	
 	@Test

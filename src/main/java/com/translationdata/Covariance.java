@@ -75,7 +75,7 @@ public class Covariance {
 		myNums2 = polyList;
 		
 		List<? extends Number> myNums3;
-		// myNums2 has a coviant generic parameter so the assignment works (i.e. Integer extends Number).
+		// myNums2 has a covariant generic parameter so the assignment works (i.e. Integer extends Number).
 		List<Integer> intList = new ArrayList<Integer>() {
 			{
 				add(new Integer(1));
@@ -102,7 +102,7 @@ public class Covariance {
 		List<Number> myNumbers;
 		
 		// Java compiler catches the type mismatch here...
-		myNumbers = myNums3; 		// Compiler error
+		myNumbers = myNums3; 		// Compiler error, cannot assign a coviant list to an invariant list.
 		myNumbers.add(new Long(4)); // If this executes (it will NOT execute becuase of the previous error), 
 									// the Integer list is corrupted by the Long value.
 
@@ -114,14 +114,14 @@ public class Covariance {
 	}
 
 	
-	public void collectionsAreInvariant() {
+	public void collectionsThatAreInvariant() {
+		// Without changing the String generic type to Object on the left, fix he following compiler error...
 		ArrayList<String> strings = new ArrayList<Object>();
+		
+		// Without change the String generic type to Object on the left, fix he following compiler error...
 		ArrayList<Object> objects = new ArrayList<String>();
 		
-		Object[] objectArray = new String[1];
-		
-
-		//none of the following expressions will compile because collections are invariant:
+		//none of the following expressions will compile because the method function is invariant:
 		Integer[] result = method(new ArrayList<Integer>());
 		Number[] result2 = method(new ArrayList<Integer>());
 		Object[] result3 = method(new ArrayList<Object>());
@@ -132,7 +132,6 @@ public class Covariance {
 	
 	Number[] method(ArrayList<Number> list) {
 		return null; 
-		
 	}
 	
 	@Test

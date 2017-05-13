@@ -88,18 +88,18 @@ public class CovariantNumbers {
 
 		// This looks like it should work but the compiler does not know if the collection is a list of Number, Integer, 
 		// Long, Short, Byte, Double, AtomicInteger, or AtomicLong.
-		polyNums.add(new Integer(4)); // Compiler error
+//		polyNums.add(new Integer(4)); // Compiler error
 		
 		// The following demonstrates why the write to mynum2, a list of Integers, is disallowed. 
 		// You cannot add a Long to a list of Integers.
-		polyNums.add(new Long(5)); // Compiler error
+//		polyNums.add(new Long(5)); // Compiler error
 
 		// Try to subvert the type system!
 		List<Number> myNumbers;
 		
 		// Java compiler catches the type mismatch here...
-		myNumbers = convariantNums; // Compiler error
-		myNumbers.add(new Long(4)); // If this executes (it will NOT execute because of the previous error), 
+//		myNumbers = convariantNums; // Compiler error
+//		myNumbers.add(new Long(4)); // If this executes (it will NOT execute because of the previous error), 
 									// the Integer list is corrupted by the Long value.
 		
 		
@@ -113,19 +113,19 @@ public class CovariantNumbers {
 			}
 		};
 		numberList = integerList;
-		numberList.set(0, 1);
+//		numberList.set(0, 1);
 		numberList.remove(0);
 		
 		// This looks like it should work but the compiler does not know if the collection is a list of Number, Integer, 
 		// Long, Short, Byte, Double, AtomicInteger, or AtomicLong.
-		numberList.add(new Integer(4)); // Compiler error
+//		numberList.add(new Integer(4)); // Compiler error
 		
 		// But adding an Integer to integerList is okay because integerList is invariant!
 		integerList.add(new Integer(5));		
 		
 		// The following demonstrates why the write to integerList is disallowed. 
 		// You cannot add a Long to a list of Integers.
-		numberList.add(new Long(5)); // Compiler error
+//		numberList.add(new Long(5)); // Compiler error
 		
 		for (Number number : polymorphicList) {
 			System.out.println(number);
@@ -139,7 +139,7 @@ public class CovariantNumbers {
 	}
 	
 
-	public <T> void f (Dog<T> x) {}
+//	public <T> void f (Dog<T> x) {}
 	
 	
 	@Test
